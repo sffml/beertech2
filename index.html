@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beer Technologies Consulting - Услуги технолога пивовара</title>
+    <style>
+        /* Основные стили */
+        :root {
+            --primary-color: #1a3a6e;
+            --secondary-color: #e67e22;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --success-color: #28a745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка сайта */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary-color);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Герой-баннер */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1551029506-0807df4e2031?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            background-color: #d35400;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Секции */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        /* Обо мне */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+        }
+        
+        .about-image {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Кейсы */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .case-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .case-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .case-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .case-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .case-card:hover .case-image img {
+            transform: scale(1.1);
+        }
+        
+        .case-content {
+            padding: 25px;
+        }
+        
+        .case-content h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .case-content p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .case-link {
+            display: inline-block;
+            color: var(--secondary-color);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .case-link:hover {
+            color: #d35400;
+        }
+        
+        /* Услуги */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service-icon {
+            font-size: 50px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .service-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        /* Контакты */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .contact-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .contact-icon {
+            font-size: 40px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        .contact-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .contact-card p, .contact-card a {
+            color: #666;
+            text-decoration: none;
+        }
+        
+        .contact-card a:hover {
+            color: var(--secondary-color);
+        }
+        
+        /* Форма */
+        .contact-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 15px;
+            font-size: 24px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            color: #aaa;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                order: -1;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 30px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .cases-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form {
+                padding: 20px;
+            }
+        }
+    </style>
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Beer <span>Technologies</span> Consulting</div>
+            <nav>
+                <ul>
+                    <li><a href="#about">Обо мне</a></li>
+                    <li><a href="#cases">Кейсы</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Герой -->
+    <section class="hero">
+        <div class="container">
+            <h1>Профессиональный технолог для вашей пивоварни</h1>
+            <p>30 лет опыта в оптимизации производства, контроле качества и разработке уникальных сортов пива</p>
+            <a href="#contact" class="btn">Связаться со мной</a>
+        </div>
+    </section>
+    
+    <!-- Обо мне -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Обо мне</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Александр Петров</h3>
+                    <p>Технолог-пивовар с 30-летним стажем работы на производствах разного масштаба: от мини-пивоварен до крупных заводов.</p>
+                    <p>Специализация: контроль качества, разработка рецептур, обучение персонала, оптимизация производственных процессов.</p>
+                    <p>Помог более 50 пивоварням в России и СНГ:</p>
+                    <ul style="margin-left: 20px; margin-bottom: 20px;">
+                        <li>Снизить процент брака с 20% до 3%</li>
+                        <li>Увеличить прибыль за счёт оптимизации процессов</li>
+                        <li>Разработать хитовые сорта, которые хорошо продаются</li>
+                    </ul>
+                    <p>Моя цель - помочь малому бизнесу варить качественное пиво без лишних затрат.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1604908550665-3273636f2be6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Технолог-пивовар">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Кейсы -->
+    <section id="cases">
+        <div class="container">
+            <div class="section-title">
+                <h2>Реальные кейсы</h2>
+            </div>
+            <div class="cases-grid">
+                <div class="case-card">
+                    <div class="case-image">
+                        <img src="https://images.unsplash.com/photo-1516458460442-933eca2e3095?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Пивоварня Хмельной Урал">
+                    </div>
+                    <div class="case-content">
+                        <h3>Пивоварня "Хмельной Урал"</h3>
+                        <p>Проблема: нестабильное качество, жалобы клиентов.</p>
+                        <a href="case1.html" class="case-link" target="_blank">Подробнее о кейсе →</a>
+                    </div>
+                </div>
+                
+                <div class="case-card">
+                    <div class="case-image">
+                        <img src="https://images.unsplash.com/photo-1535958636474-b021ee887b13?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Крафтовая пивоварня HopHead">
+                    </div>
+                    <div class="case-content">
+                        <h3>Крафтовая пивоварня "HopHead"</h3>
+                        <p>Проблема: слабые продажи стандартных сортов.</p>
+                        <a href="case2.html" class="case-link" target="_blank">Подробнее о кейсе →</a>
+                    </div>
+                </div>
+                
+                <div class="case-card">
+                    <div class="case-image">
+                        <img src="https://images.unsplash.com/photo-1600788886242-5c96aabe3757?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Микропивоварня Бочонок">
+                    </div>
+                    <div class="case-content">
+                        <h3>Микропивоварня "Бочонок"</h3>
+                        <p>Проблема: высокие затраты на производство.</p>
+                        <a href="case3.html" class="case-link" target="_blank">Подробнее о кейсе →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Услуги -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Услуги</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3>Удалённый контроль производства</h3>
+                    <p>Ежедневный мониторинг процессов через WhatsApp/Telegram, отчёты, оперативные решения проблем</p>
+                    <div class="price">от 15 000 руб./мес</div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Выездной аудит</h3>
+                    <p>Проверка оборудования, микробиологический контроль, обучение персонала на месте</p>
+                    <div class="price">от 30 000 руб.</div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-beer"></i>
+                    </div>
+                    <h3>Разработка нового сорта</h3>
+                    <p>Создание уникального пива под ваше оборудование, включая документы для регистрации</p>
+                    <div class="price">от 50 000 руб.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Контакты -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Контакты</h2>
+            </div>
+            <div class="contact-info">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Телефон</h3>
+                    <p><a href="tel:+79991234567">+7 (999) 123-45-67</a></p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p><a href="mailto:info@beertech.ru">info@beertech.ru</a></p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Адрес</h3>
+                    <p>г. Москва, ул. Пивоваренная, 15</p>
+                </div>
+            </div>
+            
+            <!-- Форма обратной связи -->
+            <div class="contact-form">
+                <h3 style="text-align: center; margin-bottom: 30px; color: var(--primary-color);">Свяжитесь со мной</h3>
+                <form id="contactForm" action="https://formspree.io/f/stuff_mail@internet.ru" method="POST">
+                    <input type="hidden" name="_subject" value="Заявка с сайта">
+                    <input type="hidden" name="_replyto" id="replyTo">
+                    
+                    <div class="form-group">
+                        <label for="name">Ваше имя</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="service">Интересующая услуга</label>
+                        <select id="service" name="service" required>
+                            <option value="">Выберите услугу</option>
+                            <option value="Удалённый контроль">Удалённый контроль</option>
+                            <option value="Выездной аудит">Выездной аудит</option>
+                            <option value="Разработка рецепта">Разработка рецепта</option>
+                            <option value="Другое">Другое</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" name="message"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn" style="width: 100%;">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Подвал -->
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">Beer <span>Technologies</span> Consulting</div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-vk"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="copyright">
+                © 2023 Beer Technologies Consulting. Все права защищены.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Обработка формы
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            // Устанавливаем тему письма с выбранной услугой
+            const service = document.getElementById('service').value;
+            document.querySelector('input[name="_subject"]').value = `Заявка с сайта. ${service}`;
+            
+            // Устанавливаем email для ответа
+            const email = document.getElementById('email').value;
+            document.getElementById('replyTo').value = email;
+            
+            // Здесь можно добавить дополнительную обработку перед отправкой
+            // Например, валидацию или отправку данных в Analytics
+        });
+    </script>
+</body>
+</html>
