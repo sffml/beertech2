@@ -251,43 +251,104 @@
             color: #d35400;
         }
         
-        /* Услуги */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .service-card {
-            background-color: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-            text-align: center;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .service-icon {
-            font-size: 50px;
-            color: var(--secondary-color);
-            margin-bottom: 20px;
-        }
-        
-        .service-card h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-        
-        .service-card p {
-            color: #666;
-            margin-bottom: 20px;
-        }
+       /* Карусель услуг */
+.services-carousel {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
+.services-track {
+    display: flex;
+    gap: 30px;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    padding: 20px 0;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 10;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn.prev {
+    left: 0;
+}
+
+.carousel-btn.next {
+    right: 0;
+}
+
+.service-link {
+    display: inline-block;
+    margin-top: 15px;
+    color: var(--secondary-color);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.service-link:hover {
+    color: #d35400;
+    text-decoration: underline;
+}
+
+.result {
+    font-style: italic;
+    color: var(--primary-color);
+    margin: 15px 0;
+}
+
+/* Адаптивность карусели */
+@media (max-width: 992px) {
+    .services-carousel {
+        padding: 0 40px;
+    }
+    
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .services-carousel {
+        padding: 0 30px;
+    }
+}
+
+@media (max-width: 576px) {
+    .services-carousel {
+        padding: 0 20px;
+    }
+    
+    .carousel-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+}
         
         /* Контакты */
         .contact-info {
@@ -561,41 +622,86 @@
     </section>
     
     <!-- Услуги -->
-    <section id="services">
-        <div class="container">
-            <div class="section-title">
-                <h2>Услуги</h2>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop"></i>
-                    </div>
-                    <h3>Удалённый контроль производства</h3>
-                    <p>Ежедневный мониторинг процессов через WhatsApp/Telegram, отчёты, оперативные решения проблем</p>
-                    <div class="price">от 15 000 руб./мес</div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <h3>Выездной аудит</h3>
-                    <p>Проверка оборудования, микробиологический контроль, обучение персонала на месте</p>
-                    <div class="price">от 30 000 руб.</div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-beer"></i>
-                    </div>
-                    <h3>Разработка нового сорта</h3>
-                    <p>Создание уникального пива под ваше оборудование, включая документы для регистрации</p>
-                    <div class="price">от 50 000 руб.</div>
-                </div>
-            </div>
+  <!-- Услуги -->
+<section id="services">
+    <div class="container">
+        <div class="section-title">
+            <h2>Услуги</h2>
         </div>
-    </section>
+        
+        <div class="services-carousel">
+            <button class="carousel-btn prev" aria-label="Предыдущая услуга">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            
+            <div class="services-track">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Контроль качества и процессов</h3>
+                    <p>Проверка сырья, оборудования и технологий. Пошаговый контроль варки, брожения и розлива.</p>
+                    <p class="result"><strong>Результат:</strong> Стабильное качество пива в каждой партии.</p>
+                    <a href="service-quality.html" class="service-link">Подробнее →</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3>Микробиологическая безопасность</h3>
+                    <p>Выездной аудит: ищем источники заражения (дикие дрожжи, бактерии). Экспресс-тесты на месте.</p>
+                    <p class="result"><strong>Результат:</strong> Чистое пиво без посторонних привкусов.</p>
+                    <a href="service-microbiology.html" class="service-link">Подробнее →</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Обучение персонала</h3>
+                    <p>Теория + практика: как варить, чистить, обслуживать оборудование. Контроль дисциплины.</p>
+                    <p class="result"><strong>Результат:</strong> Команда, которая не портит ваше пиво.</p>
+                    <a href="service-training.html" class="service-link">Подробнее →</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>Разработка новых сортов</h3>
+                    <p>Под ваш бюджет, оборудование и локальные тренды. Тестовые партии 20 л + дегустация.</p>
+                    <p class="result"><strong>Результат:</strong> Уникальное пиво, которое купят.</p>
+                    <a href="service-development.html" class="service-link">Подробнее →</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Оптимизация затрат</h3>
+                    <p>Как снизить расходы на сырьё без потери качества. Настройка оборудования для экономии.</p>
+                    <p class="result"><strong>Результат:</strong> Снижение себестоимости на 15-30%.</p>
+                    <a href="service-optimization.html" class="service-link">Подробнее →</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3>Юридическая поддержка</h3>
+                    <p>Помощь в сертификации, оформлении ТУ, ТИ. Консультации по налогам и нормам.</p>
+                    <p class="result"><strong>Результат:</strong> Полное соответствие законодательству.</p>
+                    <a href="service-legal.html" class="service-link">Подробнее →</a>
+                </div>
+            </div>
+            
+            <button class="carousel-btn next" aria-label="Следующая услуга">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+</section>
     
     <!-- Контакты -->
     <section id="contact">
@@ -704,5 +810,55 @@
             // Например, валидацию или отправку данных в Analytics
         });
     </script>
+<script>
+    // Карусель услуг
+    document.addEventListener('DOMContentLoaded', function() {
+        const track = document.querySelector('.services-track');
+        const cards = document.querySelectorAll('.service-card');
+        const prevBtn = document.querySelector('.carousel-btn.prev');
+        const nextBtn = document.querySelector('.carousel-btn.next');
+        const cardWidth = cards[0].offsetWidth + 30; // ширина карточки + gap
+        
+        let position = 0;
+        const visibleCards = 3; // Количество видимых карточек
+        
+        function updateCarousel() {
+            track.style.transform = `translateX(${position}px)`;
+        }
+        
+        function moveLeft() {
+            position += cardWidth;
+            if (position > 0) {
+                position = -((cards.length - visibleCards) * cardWidth);
+            }
+            updateCarousel();
+        }
+        
+        function moveRight() {
+            position -= cardWidth;
+            if (position < -((cards.length - visibleCards) * cardWidth)) {
+                position = 0;
+            }
+            updateCarousel();
+        }
+        
+        prevBtn.addEventListener('click', moveLeft);
+        nextBtn.addEventListener('click', moveRight);
+        
+        // Адаптация под разное количество видимых карточек
+        function handleResize() {
+            const width = window.innerWidth;
+            if (width < 992) {
+                visibleCards = 2;
+            }
+            if (width < 576) {
+                visibleCards = 1;
+            }
+        }
+        
+        window.addEventListener('resize', handleResize);
+        handleResize();
+    });
+</script>
 </body>
 </html>
