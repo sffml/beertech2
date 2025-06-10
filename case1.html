@@ -3,14 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кейс: Пивоварня "Хмельной Урал" | Beer Technologies Consulting</title>
+    <title>Кейс: Пивоварня "Ландау Бирлаб" | Beer Technologies Consulting</title>
     <style>
-        /* Скопируйте сюда все стили из основного файла */
+        /* Основные стили */
+        :root {
+            --primary-color: #1a3a6e;
+            --secondary-color: #e67e22;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --success-color: #28a745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка сайта */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary-color);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Кнопка */
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            background-color: #d35400;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Секции */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        /* Карточка кейса */
+        .case-detail-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .case-detail-image {
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .case-detail-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .case-detail-content {
+            padding: 40px;
+        }
+        
+        .case-detail-content h3 {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .case-detail-content h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .case-detail-content ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .case-detail-content li {
+            margin-bottom: 8px;
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 15px;
+            font-size: 24px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            color: #aaa;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .case-detail-image {
+                height: 250px;
+            }
+            
+            .case-detail-content {
+                padding: 25px;
+            }
+        }
     </style>
+    <!-- Font Awesome для иконок -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Шапка (такая же как на главной) -->
+    <!-- Шапка -->
     <header>
         <div class="container header-container">
             <div class="logo">Beer <span>Technologies</span> Consulting</div>
@@ -24,47 +261,54 @@
             </nav>
         </div>
     </header>
-
-    <!-- Контент кейса -->
-    <section class="case-detail" style="padding: 80px 0;">
+    
+    <!-- Детали кейса -->
+    <section class="case-detail">
         <div class="container">
-            <h2 style="text-align: center; margin-bottom: 50px;">Кейс: Пивоварня "Хмельной Урал"</h2>
+            <div class="section-title">
+                <h2>Кейс: Пивоварня "Ландау Бирлаб"</h2>
+            </div>
             
-            <div class="case-content" style="max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                <img src="https://images.unsplash.com/photo-1516458460442-933eca2e3095?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Пивоварня Хмельной Урал" style="width: 100%; border-radius: 5px; margin-bottom: 30px;">
+            <div class="case-detail-card">
+                <div class="case-detail-image">
+                    <img src="https://images.unsplash.com/photo-1532635241-17e820acc59f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Пивоварня Ландау Бирлаб">
+                </div>
                 
-                <h3 style="color: #1a3a6e; margin-bottom: 20px;">Проблема</h3>
-                <p style="margin-bottom: 20px;">Пивоварня "Хмельной Урал" столкнулась с проблемой нестабильного качества пива - каждая партия имела разный вкус, что вызывало жалобы клиентов. Уровень брака достигал 25%.</p>
-                
-                <h3 style="color: #1a3a6e; margin-bottom: 20px;">Решение</h3>
-                <p style="margin-bottom: 20px;">Был проведен комплексный аудит производства, который выявил:</p>
-                <ul style="margin-left: 20px; margin-bottom: 20px;">
-                    <li>Несоблюдение температурных режимов брожения</li>
-                    <li>Отсутствие стандартов чистки оборудования</li>
-                    <li>Неправильное хранение солода и хмеля</li>
-                </ul>
-                <p style="margin-bottom: 20px;">Мы внедрили:</p>
-                <ul style="margin-left: 20px; margin-bottom: 20px;">
-                    <li>Четкие технологические карты для каждого этапа</li>
-                    <li>Систему контроля качества</li>
-                    <li>Обучение персонала</li>
-                    <li>Еженедельный удаленный контроль</li>
-                </ul>
-                
-                <h3 style="color: #1a3a6e; margin-bottom: 20px;">Результат</h3>
-                <p style="margin-bottom: 20px;">За 2 месяца работы:</p>
-                <ul style="margin-left: 20px; margin-bottom: 20px;">
-                    <li>Брак снижен с 25% до 4%</li>
-                    <li>Жалобы клиентов прекратились</li>
-                    <li>Производительность увеличилась на 15%</li>
-                </ul>
-                
-                <a href="index.html#cases" class="btn" style="display: inline-block; margin-top: 30px;">Вернуться к кейсам</a>
+                <div class="case-detail-content">
+                    <h3>Клиент</h3>
+                    <p>Крафтовая пивоварня "Ландау Бирлаб" (г. Сергиев Посад, варочный порядок 1 т)</p>
+                    
+                    <h3>Основные проблемы малого производства</h3>
+                    <ul>
+                        <li>Нестабильность характеристик пива от партии к партии</li>
+                        <li>Отсутствие чётких стандартов контроля сырья и готового продукта</li>
+                        <li>Слабая дифференциация ассортимента</li>
+                    </ul>
+                    
+                    <h3>Решение</h3>
+                    <ul>
+                        <li>Внедрение системы технологических карт с жёсткими параметрами (pH, плотность, температура брожения)</li>
+                        <li>Разработка базовых рецептур (светлый эль, пшеничное, IPA) с адаптацией под локальные вкусы</li>
+                        <li>Обучение персонала замерам и корректировкам на каждом этапе</li>
+                    </ul>
+                    
+                    <h3>Результат</h3>
+                    <ul>
+                        <li>Снижение брака с 18% до 4% за 6 месяцев</li>
+                        <li>Появление "фирменного" стиля пивоварни – баланс между доступностью и сложностью</li>
+                        <li>Увеличение повторных покупок на 35% благодаря стабильному качеству</li>
+                    </ul>
+                    
+                    <div style="text-align: center; margin-top: 40px;">
+                        <a href="index.html#cases" class="btn">Вернуться к кейсам</a>
+                        <a href="index.html#contact" class="btn" style="margin-left: 15px;">Заказать консультацию</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-
-    <!-- Подвал (такой же как на главной) -->
+    
+    <!-- Подвал -->
     <footer>
         <div class="container footer-content">
             <div class="logo">Beer <span>Technologies</span> Consulting</div>
