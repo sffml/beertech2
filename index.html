@@ -796,20 +796,78 @@
     </footer>
     
     <script>
-        // Обработка формы
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            // Устанавливаем тему письма с выбранной услугой
+
+        
+        document.addEventListener('DOMContentLoaded', function() {
+        const contactForm = document.getElementById('contactForm');
+        const notification = document.getElementById('formNotification');
+        const messageElement = document.getElementById('notificationMessage');
+
+        // Обработчик отправки формы
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault(); // Сначала предотвращаем стандартную отправку
+
+            // Устанавливаем тему письма и email для ответа
             const service = document.getElementById('service').value;
-            document.querySelector('input[name="_subject"]').value = `Заявка с сайта. ${service}`;
-            
-            // Устанавливаем email для ответа
-            const email = document.getElementById('email').value;
-            document.getElementById('replyTo').value = email;
-            
-            // Здесь можно добавить дополнительную обработку перед отправкой
-            // Например, валидацию или отправку данных в Analytics
+            document.querySelector('input[name="_subject"]').value = `Заявка с сайта: ${service}`;
+            document.getElementById('replyTo').value = document.getElementById('email').value;
+
+            // Блокируем кнопку во избежание повторных отправок
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = 'Отправка...';
+            submitBtn.disabled = true;
+
+            // Собираем данные формы
+            const formData = new FormData(this);
+
+            try {
+                // Отправляем запрос на Formspree
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // УСПЕХ
+                    showNotification('Ваше сообщение отправлено! Я свяжусь с вами в ближайшее время.', 'var(--success-color)');
+                    contactForm.reset(); // Очищаем форму
+                } else {
+                    // ОШИБКА ОТВЕТА ОТ СЕРВЕРА
+                    const errorData = await response.json();
+                    if (errorData.errors) {
+                        showNotification(`Ошибка: ${errorData.errors.map(error => error.message).join(', ')}`, '#dc3545');
+                    } else {
+                        throw new Error(response.statusText);
+                    }
+                }
+            } catch (error) {
+                // ОШИБКА СЕТИ ИЛИ ДРУГАЯ НЕПРЕДВИДЕННАЯ ОШИБКА
+                showNotification('Произошла ошибка при отправке. Пожалуйста, попробуйте еще раз или свяжитесь со мной по телефону/email.', '#dc3545');
+                console.error('Form submission error:', error);
+            } finally {
+                // Разблокируем кнопку в любом случае
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
+            }
         });
-    </script>
+
+        // Функция показа уведомлений
+        function showNotification(message, backgroundColor) {
+            messageElement.textContent = message;
+            notification.style.backgroundColor = backgroundColor;
+            notification.style.display = 'flex';
+            notification.style.alignItems = 'center';
+            notification.style.justifyContent = 'space-between';
+
+            // Автоматически скрыть через 5 секунд
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 5000);
+        }
 <script>
     // Карусель услуг
     document.addEventListener('DOMContentLoaded', function() {
